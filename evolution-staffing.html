@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolution Staffing | National Workforce Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--tl:#8ECAE6;--tm:#219EBC;--nv:#023047;--sl:#979DAC;--wh:#ffffff;--ow:#F7FAFB;--bd:#E4EDF2;--mu:#5A6370;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Geist',sans-serif;background:#fff;color:var(--nv);overflow-x:hidden;}
+#prog{position:fixed;top:0;left:0;height:2px;background:var(--tm);z-index:9999;width:0;transition:width .1s linear;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);transition:box-shadow .3s;}
+nav.sc{box-shadow:0 1px 24px rgba(2,48,71,.07);}
+.logo{font-family:'Instrument Serif',serif;font-size:1.5rem;color:var(--nv);text-decoration:none;cursor:pointer;letter-spacing:-.3px;}
+.logo span{color:var(--tm);}
+.nl{display:flex;align-items:center;gap:2rem;list-style:none;}
+.nl a{font-size:.85rem;font-weight:500;color:var(--mu);text-decoration:none;cursor:pointer;transition:color .2s;}
+.nl a:hover{color:var(--nv);}
+.ncta{background:var(--nv);color:#fff !important;padding:.5rem 1.25rem;border-radius:6px;font-size:.82rem !important;transition:background .2s !important;}
+.ncta:hover{background:var(--tm) !important;}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.ham span{width:22px;height:1.5px;background:var(--nv);border-radius:2px;transition:.3s;}
+.mm{display:none;position:fixed;top:68px;left:0;right:0;background:#fff;z-index:999;border-bottom:1px solid var(--bd);padding:1.25rem 6% 1.75rem;flex-direction:column;gap:.875rem;}
+.mm.open{display:flex;}
+.mm a{color:var(--nv);text-decoration:none;font-size:.95rem;font-weight:500;cursor:pointer;padding:.5rem 0;border-bottom:1px solid var(--bd);}
+.page{display:none;padding-top:68px;}
+.page.active{display:block;}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
+.rv.vis{opacity:1;transform:translateY(0);}
+.lbl{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tm);margin-bottom:.625rem;display:block;}
+.dsp{font-family:'Instrument Serif',serif;font-size:clamp(2.6rem,5vw,4.5rem);line-height:1.08;letter-spacing:-.5px;color:var(--nv);}
+.sh{font-family:'Instrument Serif',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);line-height:1.1;letter-spacing:-.3px;color:var(--nv);margin-bottom:.875rem;}
+.sub{font-size:1rem;color:var(--mu);line-height:1.75;max-width:520px;}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.75rem;border-radius:7px;font-size:.9rem;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all .22s;font-family:'Geist',sans-serif;}
+.bn{background:var(--nv);color:#fff;}
+.bn:hover{background:var(--tm);transform:translateY(-1px);box-shadow:0 6px 20px rgba(33,158,188,.3);}
+.bt{background:var(--tm);color:#fff;}
+.bt:hover{background:var(--nv);transform:translateY(-1px);}
+.bo{background:transparent;color:var(--nv);border:1.5px solid var(--bd);}
+.bo:hover{border-color:var(--tm);color:var(--tm);}
+.bow{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);}
+.bow:hover{border-color:#fff;background:rgba(255,255,255,.1);}
+.bw{background:#fff;color:var(--nv);}
+.bw:hover{background:var(--ow);}
+.wrap{max-width:1160px;margin:0 auto;padding:0 6%;}
+section{padding:5.5rem 0;}
+hr.dv{border:none;border-top:1px solid var(--bd);}
+/* HERO */
+.hero{min-height:calc(100vh - 68px);position:relative;overflow:hidden;display:flex;align-items:center;}
+.hbg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?w=1800&q=80') center/cover no-repeat;}
+.hov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(2,48,71,.88) 0%,rgba(2,48,71,.6) 60%,rgba(2,48,71,.25) 100%);}
+.hc{position:relative;z-index:2;padding:5rem 6%;max-width:1160px;margin:0 auto;width:100%;}
+.hey{display:inline-block;background:rgba(142,202,230,.18);border:1px solid rgba(142,202,230,.35);color:#8ECAE6;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.35rem 1rem;border-radius:100px;margin-bottom:2rem;animation:fu .7s ease both;}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(3rem,6.5vw,5.5rem);line-height:1.05;color:#fff;letter-spacing:-.5px;margin-bottom:1.5rem;animation:fu .7s .1s ease both;}
+.hero h1 em{font-style:italic;color:var(--tl);}
+.hero .sub{color:rgba(255,255,255,.75);font-size:1.1rem;margin-bottom:2.75rem;animation:fu .7s .2s ease both;max-width:560px;}
+.hbtns{display:flex;gap:1rem;flex-wrap:wrap;animation:fu .7s .3s ease both;}
+.hrule{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#fff,transparent);}
+/* STATS BAR */
+.sb{background:var(--ow);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.sbi{display:flex;max-width:1160px;margin:0 auto;padding:0 6%;}
+.si{flex:1;padding:2rem 1.5rem;border-right:1px solid var(--bd);}
+.si:last-child{border-right:none;}
+.sn{font-family:'Instrument Serif',serif;font-size:2.5rem;color:var(--nv);display:block;line-height:1;}
+.sl2{font-size:.8rem;color:var(--mu);margin-top:.4rem;display:block;}
+/* IND GRID */
+.ig{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;}
+.ic{background:#fff;padding:1.75rem 1.5rem;transition:background .2s;cursor:default;}
+.ic:hover{background:var(--ow);}
+.ic-n{font-weight:600;font-size:.95rem;color:var(--nv);margin-bottom:.3rem;}
+.ic-d{font-size:.82rem;color:var(--mu);line-height:1.55;}
+.ic-dot{width:6px;height:6px;border-radius:50%;background:var(--tm);margin-bottom:1rem;}
+/* MODELS */
+.mg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.mc{border:1px solid var(--bd);border-radius:12px;padding:2rem;transition:all .25s;}
+.mc:hover{border-color:var(--tm);box-shadow:0 8px 32px rgba(33,158,188,.1);transform:translateY(-3px);}
+.mn{font-family:'Instrument Serif',serif;font-size:1.75rem;color:var(--tl);margin-bottom:1rem;display:block;}
+.mt{font-weight:600;font-size:1rem;margin-bottom:.5rem;}
+.md{font-size:.875rem;color:var(--mu);line-height:1.65;}
+/* VALUE STRIP */
+.vs{background:var(--nv);padding:5.5rem 0;}
+.vl{display:flex;flex-direction:column;gap:0;}
+.vr{display:flex;gap:2rem;align-items:flex-start;padding:1.75rem 0;border-bottom:1px solid rgba(255,255,255,.08);}
+.vr:first-child{border-top:1px solid rgba(255,255,255,.08);}
+.vrn{font-family:'Instrument Serif',serif;font-size:1.1rem;color:var(--tl);min-width:32px;padding-top:.15rem;}
+.vrt{font-weight:600;color:#fff;font-size:.95rem;margin-bottom:.3rem;}
+.vrd{font-size:.875rem;color:rgba(255,255,255,.55);line-height:1.6;}
+/* LOCATIONS */
+.lg2{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.875rem;}
+.lc{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.875rem;transition:all .2s;}
+.lc:hover{border-color:var(--tm);box-shadow:0 4px 16px rgba(33,158,188,.1);}
+.ll{width:2px;height:28px;background:var(--tm);border-radius:2px;flex-shrink:0;}
+.ll.ga{background:var(--nv);}
+.lci{font-weight:600;font-size:.9rem;color:var(--nv);}
+.lcs{font-size:.75rem;color:var(--mu);margin-top:.15rem;}
+/* JOBS */
+.fb{display:flex;gap:.625rem;flex-wrap:wrap;margin-bottom:2rem;}
+.fb2{padding:.45rem 1.1rem;border-radius:100px;border:1.5px solid var(--bd);background:#fff;cursor:pointer;font-size:.82rem;font-weight:500;color:var(--mu);transition:all .18s;font-family:'Geist',sans-serif;}
+.fb2:hover,.fb2.act{border-color:var(--tm);background:var(--tm);color:#fff;}
+.jg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.125rem;}
+.jc{border:1px solid var(--bd);border-radius:12px;padding:1.75rem;background:#fff;transition:all .25s;}
+.jc:hover{border-color:var(--tm);box-shadow:0 8px 28px rgba(33,158,188,.1);transform:translateY(-2px);}
+.jt{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;}
+.jb{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.28rem .75rem;border-radius:100px;background:rgba(33,158,188,.1);color:var(--tm);}
+.jb.hot{background:rgba(220,38,38,.08);color:#dc2626;}
+.jtl{font-weight:600;font-size:1rem;color:var(--nv);margin-bottom:.625rem;}
+.jm{display:flex;flex-direction:column;gap:.3rem;margin-bottom:1.25rem;}
+.jm span{font-size:.82rem;color:var(--mu);}
+.ja{width:100%;padding:.75rem;background:var(--nv);color:#fff;border:none;border-radius:7px;font-weight:600;font-size:.875rem;cursor:pointer;font-family:'Geist',sans-serif;transition:background .2s;}
+.ja:hover{background:var(--tm);}
+/* FORMS */
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+.ff{grid-column:1/-1;}
+.fi{display:flex;flex-direction:column;gap:.45rem;}
+.fi label{font-size:.8rem;font-weight:600;color:var(--nv);letter-spacing:.02em;}
+.fi input,.fi select,.fi textarea{padding:.8rem 1rem;border-radius:7px;border:1.5px solid var(--bd);font-family:'Geist',sans-serif;font-size:.9rem;color:var(--nv);background:#fff;width:100%;transition:border-color .2s,box-shadow .2s;}
+.fi input:focus,.fi select:focus,.fi textarea:focus{outline:none;border-color:var(--tm);box-shadow:0 0 0 3px rgba(33,158,188,.1);}
+.fi textarea{resize:vertical;min-height:110px;}
+.uz{border:2px dashed var(--bd);border-radius:10px;padding:2.5rem;text-align:center;cursor:pointer;transition:all .2s;background:var(--ow);}
+.uz:hover{border-color:var(--tm);background:rgba(142,202,230,.06);}
+.uz input{display:none;}
+.ul2{font-weight:600;font-size:.9rem;color:var(--nv);display:block;margin-bottom:.3rem;}
+.us{font-size:.8rem;color:var(--mu);}
+.fs{width:100%;padding:1rem;background:var(--nv);color:#fff;border:none;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'Geist',sans-serif;transition:all .22s;}
+.fs:hover{background:var(--tm);transform:translateY(-1px);box-shadow:0 6px 20px rgba(33,158,188,.3);}
+.sb2{display:none;background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:2.5rem;text-align:center;color:#166534;}
+.sb2 h3{font-family:'Instrument Serif',serif;font-size:1.5rem;margin-bottom:.5rem;}
+.sb2 p{font-size:.9rem;opacity:.8;}
+/* ABOUT */
+.abh{position:relative;overflow:hidden;padding:7rem 6%;}
+.abg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1800&q=80') center/cover no-repeat;}
+.abo{position:absolute;inset:0;background:rgba(2,48,71,.82);}
+.abc{position:relative;z-index:2;max-width:1160px;margin:0 auto;}
+.abh h1{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,5vw,4rem);color:#fff;margin-bottom:1rem;}
+.abh p{color:rgba(255,255,255,.7);font-size:1.05rem;line-height:1.75;max-width:560px;}
+.apg{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;border-radius:16px;overflow:hidden;}
+.ap{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.mb{background:var(--nv);border-radius:16px;padding:3rem;color:#fff;}
+.mb blockquote{font-family:'Instrument Serif',serif;font-size:1.6rem;line-height:1.45;color:#fff;border-left:3px solid var(--tm);padding-left:1.5rem;margin-bottom:2rem;}
+/* BOOKING */
+.bkg{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.bi h3{font-family:'Instrument Serif',serif;font-size:1.6rem;color:var(--nv);margin-bottom:1rem;}
+.bi p{color:var(--mu);line-height:1.75;font-size:.9rem;margin-bottom:2rem;}
+.bd2{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem;}
+.bdi{width:40px;height:40px;border-radius:8px;background:var(--ow);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--nv);flex-shrink:0;}
+.bd2 h4{font-weight:600;font-size:.875rem;margin-bottom:.2rem;}
+.bd2 p{font-size:.82rem;color:var(--mu);margin:0;}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:.625rem;margin-bottom:1.5rem;}
+.ts{padding:.65rem .5rem;border:1.5px solid var(--bd);border-radius:7px;text-align:center;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .18s;font-family:'Geist',sans-serif;background:#fff;}
+.ts:hover,.ts.sel{border-color:var(--tm);background:var(--tm);color:#fff;}
+.dg{display:grid;grid-template-columns:repeat(7,1fr);gap:.4rem;margin-bottom:1.5rem;}
+.db{padding:.6rem .25rem;border:1.5px solid var(--bd);border-radius:6px;text-align:center;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .18s;font-family:'Geist',sans-serif;background:#fff;}
+.db:hover,.db.sel{border-color:var(--tm);background:var(--tm);color:#fff;}
+.db.dis{opacity:.35;cursor:not-allowed;pointer-events:none;}
+.cm{font-weight:600;font-size:.9rem;margin-bottom:.875rem;color:var(--nv);display:flex;justify-content:space-between;align-items:center;}
+.cn{cursor:pointer;color:var(--tm);font-size:1rem;padding:.2rem .5rem;}
+/* CALC */
+.cw{background:var(--ow);border:1px solid var(--bd);border-radius:16px;overflow:hidden;}
+.ch{background:var(--nv);padding:2rem 2.5rem;}
+.ch h3{font-family:'Instrument Serif',serif;color:#fff;font-size:1.5rem;margin-bottom:.4rem;}
+.ch p{color:rgba(255,255,255,.6);font-size:.875rem;}
+.cb{padding:2.5rem;}
+.cr{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem;}
+.ciw{display:flex;flex-direction:column;gap:.45rem;}
+.ciw label{font-size:.78rem;font-weight:600;color:var(--nv);letter-spacing:.02em;}
+.cin{display:flex;align-items:center;border:1.5px solid var(--bd);border-radius:7px;overflow:hidden;background:#fff;}
+.cp{padding:.75rem 1rem;font-size:.9rem;color:var(--mu);background:var(--ow);border-right:1px solid var(--bd);font-weight:600;}
+.cin input{border:none;outline:none;padding:.75rem 1rem;font-size:.9rem;font-family:'Geist',sans-serif;color:var(--nv);width:100%;background:#fff;}
+.cin:focus-within{border-color:var(--tm);}
+.cres{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:2rem;margin-top:1.5rem;}
+.rr{display:flex;justify-content:space-between;align-items:center;padding:.875rem 0;border-bottom:1px solid var(--bd);}
+.rr:last-child{border-bottom:none;}
+.rl{font-size:.875rem;color:var(--mu);}
+.rv2{font-weight:700;font-size:.95rem;color:var(--nv);}
+.rv2.sv{color:#059669;}
+.rv2.ev{color:var(--tm);}
+.sbann{background:linear-gradient(135deg,var(--nv),var(--tm));border-radius:10px;padding:1.75rem 2rem;margin-top:1.25rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.sbl{color:rgba(255,255,255,.75);font-size:.85rem;margin-bottom:.25rem;}
+.sba{font-family:'Instrument Serif',serif;font-size:2.5rem;color:#fff;line-height:1;}
+.sbc{background:#fff;color:var(--nv);padding:.75rem 1.5rem;border-radius:7px;font-weight:700;font-size:.85rem;cursor:pointer;border:none;font-family:'Geist',sans-serif;transition:all .2s;}
+.sbc:hover{background:var(--tl);}
+/* CONTACT */
+.cog{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.cb2{display:flex;gap:1.25rem;align-items:flex-start;padding:1.5rem 0;border-bottom:1px solid var(--bd);}
+.cb2:last-child{border-bottom:none;}
+.ci{width:44px;height:44px;border-radius:10px;background:var(--ow);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--nv);flex-shrink:0;}
+.cb2 h4{font-weight:600;font-size:.875rem;margin-bottom:.25rem;}
+.cb2 p,.cb2 a{font-size:.875rem;color:var(--mu);text-decoration:none;line-height:1.6;}
+/* STEPS */
+.sts{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;position:relative;}
+.sts::before{content:'';position:absolute;top:20px;left:16.66%;right:16.66%;height:1px;background:var(--bd);}
+.st{text-align:center;padding:0 1rem;}
+.stn{width:40px;height:40px;border-radius:50%;background:var(--nv);color:#fff;font-family:'Instrument Serif',serif;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;position:relative;z-index:1;}
+.stt{font-weight:700;font-size:1rem;margin-bottom:.5rem;color:var(--nv);}
+.std{font-size:.875rem;color:var(--mu);line-height:1.65;}
+/* CTA BAND */
+.ctab{background:var(--nv);padding:5rem 0;text-align:center;}
+.ctab h2{font-family:'Instrument Serif',serif;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:1rem;}
+.ctab p{color:rgba(255,255,255,.6);font-size:1rem;margin-bottom:2.5rem;}
+.ctabtns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+/* MARQUEE */
+.mqs{background:var(--tm);padding:1.25rem 0;overflow:hidden;}
+.mqi{display:flex;gap:3.5rem;animation:mq 30s linear infinite;white-space:nowrap;}
+.mi{font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);flex-shrink:0;}
+.ms{color:rgba(255,255,255,.4);flex-shrink:0;}
+/* FOOTER */
+footer{background:var(--nv);color:#fff;padding:4.5rem 6% 2.5rem;}
+.fg3{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.08);}
+.fb3 p{color:rgba(255,255,255,.45);font-size:.85rem;line-height:1.75;margin-top:1rem;max-width:240px;}
+.fc h5{font-weight:600;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.25rem;color:rgba(255,255,255,.5);}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.fc ul a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.875rem;cursor:pointer;transition:color .2s;}
+.fc ul a:hover{color:#fff;}
+.fbot{max-width:1160px;margin:2rem auto 0;display:flex;justify-content:space-between;align-items:center;color:rgba(255,255,255,.3);font-size:.78rem;flex-wrap:wrap;gap:1rem;}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:900px){.mg,.sts,.bkg,.cog{grid-template-columns:1fr;}.sts::before{display:none;}.apg{grid-template-columns:1fr;}.fg3{grid-template-columns:1fr 1fr;}.cr{grid-template-columns:1fr;}}
+@media(max-width:680px){.nl{display:none;}.ham{display:flex;}.sbi{flex-wrap:wrap;}.si{flex:1 1 45%;border-right:none;border-bottom:1px solid var(--bd);}.fg2{grid-template-columns:1fr;}.ff{grid-column:1;}.fg3{grid-template-columns:1fr;}.hbtns{flex-direction:column;}.tg{grid-template-columns:repeat(2,1fr);}.sbann{flex-direction:column;}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav id="mn">
+  <span class="logo" onclick="sp('home')">Evolution<span>.</span></span>
+  <ul class="nl">
+    <li><a onclick="sp('home')">Home</a></li>
+    <li><a onclick="sp('services')">Services</a></li>
+    <li><a onclick="sp('jobs')">Open Jobs</a></li>
+    <li><a onclick="sp('about')">About</a></li>
+    <li><a onclick="sp('calculator')">Calculator</a></li>
+    <li><a onclick="sp('contact')">Contact</a></li>
+    <li><a onclick="sp('apply')" class="ncta">Apply Now</a></li>
+  </ul>
+  <div class="ham" onclick="toggleMM()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mm" id="mmenu">
+  <a onclick="nv('home')">Home</a>
+  <a onclick="nv('services')">Services</a>
+  <a onclick="nv('jobs')">Open Jobs</a>
+  <a onclick="nv('about')">About</a>
+  <a onclick="nv('book')">Book a Meeting</a>
+  <a onclick="nv('calculator')">Cost Calculator</a>
+  <a onclick="nv('contact')">Contact</a>
+  <a onclick="nv('apply')">Apply Now</a>
+</div>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hbg"></div><div class="hov"></div>
+    <div class="hc">
+      <div class="hey">National Staffing Solutions</div>
+      <h1>The Workforce<br>Partner You've<br>Been <em>Missing.</em></h1>
+      <p class="sub">We place qualified, pre-screened talent across healthcare, construction, utilities, logistics, and more — from Atlanta to Houston and across the Southeast.</p>
+      <div class="hbtns">
+        <button class="btn bt" onclick="sp('jobs')">Browse Open Positions</button>
+        <button class="btn bow" onclick="sp('book')">Book a Consultation</button>
+      </div>
+    </div>
+    <div class="hrule"></div>
+  </div>
+  <div class="sb">
+    <div class="sbi">
+      <div class="si rv"><span class="sn">40+</span><span class="sl2">Active job openings</span></div>
+      <div class="si rv"><span class="sn">12+</span><span class="sl2">Industries served</span></div>
+      <div class="si rv"><span class="sn">48hr</span><span class="sl2">Average fill time</span></div>
+      <div class="si rv"><span class="sn">5+</span><span class="sl2">States covered</span></div>
+    </div>
+  </div>
+  <section>
+    <div class="wrap">
+      <div class="rv"><span class="lbl">What We Staff</span><h2 class="sh">Every Industry. One Partner.</h2><p class="sub" style="margin-bottom:2.5rem;">Skilled trades to corporate roles — we have the reach and expertise to staff your team without the runaround.</p></div>
+      <div class="ig rv">
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Healthcare</div><div class="ic-d">Nurses, CNAs, medical admin, lab techs, clinical support</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Construction</div><div class="ic-d">Skilled laborers, supervisors, concrete, roofing, framing</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Electrical & Utilities</div><div class="ic-d">Licensed electricians, line workers, HVAC, utility techs</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Logistics & Shipping</div><div class="ic-d">CDL drivers, forklift, warehouse, dispatchers, receiving</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Administrative</div><div class="ic-d">Office support, data entry, customer service, receptionists</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Sales & Marketing</div><div class="ic-d">Account managers, inside sales, marketing coordinators</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Light Industrial</div><div class="ic-d">Assembly, packaging, machine operators, QA inspectors</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">IT & Technology</div><div class="ic-d">Help desk, network admins, developers, cybersecurity</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Finance & Accounting</div><div class="ic-d">Bookkeepers, payroll, accountants, financial analysts</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Maintenance & Facilities</div><div class="ic-d">Janitors, groundskeepers, repair techs, building staff</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Hospitality</div><div class="ic-d">Kitchen staff, servers, event workers, hotel front desk</div></div>
+        <div class="ic"><div class="ic-dot"></div><div class="ic-n">Education Support</div><div class="ic-d">Substitute teachers, paraprofessionals, admin staff</div></div>
+      </div>
+    </div>
+  </section>
+  <div class="mqs"><div class="mqi" id="mqinner">
+    <span class="mi">Healthcare</span><span class="ms">—</span><span class="mi">Construction</span><span class="ms">—</span><span class="mi">Electrical</span><span class="ms">—</span><span class="mi">Logistics</span><span class="ms">—</span><span class="mi">Administrative</span><span class="ms">—</span><span class="mi">Sales</span><span class="ms">—</span><span class="mi">Light Industrial</span><span class="ms">—</span><span class="mi">IT</span><span class="ms">—</span><span class="mi">Finance</span><span class="ms">—</span><span class="mi">Utilities</span><span class="ms">—</span>
+    <span class="mi">Healthcare</span><span class="ms">—</span><span class="mi">Construction</span><span class="ms">—</span><span class="mi">Electrical</span><span class="ms">—</span><span class="mi">Logistics</span><span class="ms">—</span><span class="mi">Administrative</span><span class="ms">—</span><span class="mi">Sales</span><span class="ms">—</span><span class="mi">Light Industrial</span><span class="ms">—</span><span class="mi">IT</span><span class="ms">—</span><span class="mi">Finance</span><span class="ms">—</span><span class="mi">Utilities</span><span class="ms">—</span>
+  </div></div>
+  <section>
+    <div class="wrap">
+      <div class="rv" style="text-align:center;margin-bottom:3.5rem;"><span class="lbl">How It Works</span><h2 class="sh" style="margin:0 auto .875rem;">Simple. Fast. Done.</h2><p class="sub" style="margin:0 auto;text-align:center;">Getting your positions filled shouldn't be complicated.</p></div>
+      <div class="sts rv">
+        <div class="st"><div class="stn">1</div><div class="stt">Tell Us What You Need</div><div class="std">Share your role requirements, timeline, and any specifics. One call or form — that's it.</div></div>
+        <div class="st"><div class="stn">2</div><div class="stt">We Source and Screen</div><div class="std">Our recruiters pull from our active talent pool, background-check every candidate, and verify qualifications.</div></div>
+        <div class="st"><div class="stn">3</div><div class="stt">You Hire with Confidence</div><div class="std">Review your shortlist, interview your picks, and place them — often within 48 hours of your request.</div></div>
+      </div>
+    </div>
+  </section>
+  <hr class="dv">
+  <div class="vs">
+    <div class="wrap">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;">
+        <div class="rv"><span class="lbl" style="color:var(--tl);">Why Evolution</span><h2 class="sh" style="color:#fff;">Why Companies<br>Choose Us.</h2><p class="sub" style="color:rgba(255,255,255,.6);margin-bottom:0;">We are not a job board. We are not a resume pile. We are a staffing company that places people — the right ones, fast.</p></div>
+        <div class="vl rv">
+          <div class="vr"><div class="vrn">01</div><div><div class="vrt">Pre-Screened, Ready-to-Work Talent</div><div class="vrd">Every candidate is background-checked, reference-verified, and confirmed qualified before you ever see their name.</div></div></div>
+          <div class="vr"><div class="vrn">02</div><div><div class="vrt">48-Hour Fill Time</div><div class="vrd">Most positions filled within two business days. We have an active bench — not a cold database.</div></div></div>
+          <div class="vr"><div class="vrn">03</div><div><div class="vrt">One Point of Contact</div><div class="vrd">A dedicated recruiter who knows your industry, your company, and your expectations. No ticket queues.</div></div></div>
+          <div class="vr"><div class="vrn">04</div><div><div class="vrt">30-Day Replacement Guarantee</div><div class="vrd">If a placement doesn't work out within 30 days, we replace them at no additional cost. Period.</div></div></div>
+          <div class="vr"><div class="vrn">05</div><div><div class="vrt">National Reach, Regional Expertise</div><div class="vrd">Deep roots in Georgia and Texas with the infrastructure to serve markets across the Southeast.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section>
+    <div class="wrap">
+      <div class="rv" style="margin-bottom:2.5rem;"><span class="lbl">Where We Operate</span><h2 class="sh">Rooted in Georgia.<br>Reaching the Nation.</h2></div>
+      <div class="lg2 rv">
+        <div class="lc"><div class="ll ga"></div><div><div class="lci">Atlanta</div><div class="lcs">Georgia — Headquarters</div></div></div>
+        <div class="lc"><div class="ll ga"></div><div><div class="lci">Savannah</div><div class="lcs">Georgia</div></div></div>
+        <div class="lc"><div class="ll ga"></div><div><div class="lci">Augusta</div><div class="lcs">Georgia</div></div></div>
+        <div class="lc"><div class="ll ga"></div><div><div class="lci">Columbus</div><div class="lcs">Georgia</div></div></div>
+        <div class="lc"><div class="ll ga"></div><div><div class="lci">Macon</div><div class="lcs">Georgia</div></div></div>
+        <div class="lc"><div class="ll"></div><div><div class="lci">Houston</div><div class="lcs">Texas</div></div></div>
+        <div class="lc"><div class="ll"></div><div><div class="lci">Dallas</div><div class="lcs">Texas</div></div></div>
+        <div class="lc"><div class="ll"></div><div><div class="lci">San Antonio</div><div class="lcs">Texas</div></div></div>
+        <div class="lc"><div class="ll"></div><div><div class="lci">Charlotte</div><div class="lcs">North Carolina</div></div></div>
+        <div class="lc"><div class="ll"></div><div><div class="lci">Nashville</div><div class="lcs">Tennessee</div></div></div>
+        <div class="lc"><div class="ll"></div><div><div class="lci">Jacksonville</div><div class="lcs">Florida</div></div></div>
+        <div class="lc"><div class="ll"></div><div><div class="lci">Birmingham</div><div class="lcs">Alabama</div></div></div>
+      </div>
+    </div>
+  </section>
+  <div class="ctab"><div class="wrap rv"><h2>Ready to Staff Smarter?</h2><p>Whether you need one person or a full crew — tell us what you need and we'll get to work.</p><div class="ctabtns"><button class="btn bw" onclick="sp('book')">Book a Consultation</button><button class="btn bow" onclick="sp('calculator')">Calculate Your Savings</button></div></div></div>
+  <footer><div class="fg3"><div class="fb3"><span class="logo" style="color:#fff;cursor:default;">Evolution<span>.</span></span><p>National workforce solutions headquartered in Atlanta, Georgia. Placing people that move your business forward.</p></div><div class="fc"><h5>Company</h5><ul><li><a onclick="sp('home')">Home</a></li><li><a onclick="sp('services')">Services</a></li><li><a onclick="sp('about')">About Us</a></li><li><a onclick="sp('contact')">Contact</a></li></ul></div><div class="fc"><h5>Job Seekers</h5><ul><li><a onclick="sp('jobs')">Open Positions</a></li><li><a onclick="sp('apply')">Apply Now</a></li></ul></div><div class="fc"><h5>Employers</h5><ul><li><a onclick="sp('services')">Our Services</a></li><li><a onclick="sp('book')">Book a Meeting</a></li><li><a onclick="sp('calculator')">Cost Calculator</a></li></ul></div></div><div class="fbot"><span>© 2025 Evolution Staffing. All rights reserved.</span><span>Atlanta, GA · Houston, TX</span></div></footer>
+</div>
+
+<!-- SERVICES -->
+<div id="page-services" class="page">
+  <div style="background:var(--nv);padding:6rem 6%;"><div class="wrap"><span class="lbl" style="color:var(--tl);">What We Do</span><h1 class="dsp" style="color:#fff;margin-bottom:1.25rem;">We Place People.<br>That's Our Business.</h1><p class="sub" style="color:rgba(255,255,255,.65);">From temp-to-perm to direct hire, we cover every staffing model across every major industry — with speed, accuracy, and a guarantee.</p></div></div>
+  <section><div class="wrap"><div class="rv" style="margin-bottom:2.5rem;"><span class="lbl">Staffing Models</span><h2 class="sh">How We Engage</h2></div><div class="mg rv"><div class="mc"><span class="mn">01</span><div class="mt">Temporary Staffing</div><div class="md">Short-term coverage for seasonal demand, project surges, or unexpected gaps. Scale your team up or down without long-term commitment.</div></div><div class="mc"><span class="mn">02</span><div class="mt">Temp-to-Permanent</div><div class="md">Work with a candidate on a trial basis before extending a full-time offer. The lowest-risk path to a permanent hire.</div></div><div class="mc"><span class="mn">03</span><div class="mt">Direct Hire</div><div class="md">We recruit, screen, and present top candidates for your permanent roles. You interview. You hire. We guarantee the fit.</div></div><div class="mc"><span class="mn">04</span><div class="mt">Contract Staffing</div><div class="md">Project-based specialists placed on defined contracts. Expertise on demand without the overhead.</div></div><div class="mc"><span class="mn">05</span><div class="mt">On-Site Management</div><div class="md">For high-volume accounts, we embed an Evolution manager at your facility to oversee scheduling, attendance, and performance.</div></div><div class="mc"><span class="mn">06</span><div class="mt">Emergency Staffing</div><div class="md">Need workers in 24 hours? Our rapid-response team mobilizes pre-qualified candidates fast. No waiting, no excuses.</div></div></div></div></section>
+  <hr class="dv">
+  <section><div class="wrap"><div class="rv" style="margin-bottom:2.5rem;"><span class="lbl">Industries</span><h2 class="sh">Built for Your Industry</h2><p class="sub">We know the roles, the requirements, and the pace of your industry — because we've been placing in it.</p></div><div class="ig rv"><div class="ic"><div class="ic-dot"></div><div class="ic-n">Healthcare</div><div class="ic-d">RNs, LPNs, CNAs, medical assistants, billing, lab, admin</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">Construction</div><div class="ic-d">General labor, concrete, framing, roofing, project management, safety</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">Electrical & Utilities</div><div class="ic-d">Journeyman electricians, HVAC, line workers, utility techs</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">Logistics & Shipping</div><div class="ic-d">CDL-A/B drivers, forklift operators, warehouse, dispatchers</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">Administrative</div><div class="ic-d">Executive assistants, data entry, customer service, office managers</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">Sales & Marketing</div><div class="ic-d">Inside sales, account managers, reps, marketing coordinators</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">Light Industrial</div><div class="ic-d">Machine operators, assembly, QA inspectors, packaging, production</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">IT & Technology</div><div class="ic-d">Help desk, network admins, developers, analysts, cybersecurity</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">Finance & Accounting</div><div class="ic-d">Bookkeepers, accountants, payroll, financial analysts, controllers</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">Maintenance & Facilities</div><div class="ic-d">Janitorial, groundskeepers, repair technicians, building engineers</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">Hospitality & Food Service</div><div class="ic-d">Kitchen staff, servers, catering, hotel front desk, event staffing</div></div><div class="ic"><div class="ic-dot"></div><div class="ic-n">Education Support</div><div class="ic-d">Substitute teachers, paraprofessionals, tutors, administrative</div></div></div></div></section>
+  <div class="ctab"><div class="wrap rv"><h2>Need Positions Filled?</h2><p>Tell us what you need. Our team will respond within the hour during business hours.</p><div class="ctabtns"><button class="btn bw" onclick="sp('book')">Book a Consultation</button><button class="btn bow" onclick="sp('contact')">Contact Us</button></div></div></div>
+  <footer><div class="fg3"><div class="fb3"><span class="logo" style="color:#fff;cursor:default;">Evolution<span>.</span></span><p>National workforce solutions headquartered in Atlanta, Georgia.</p></div><div class="fc"><h5>Company</h5><ul><li><a onclick="sp('home')">Home</a></li><li><a onclick="sp('services')">Services</a></li><li><a onclick="sp('about')">About Us</a></li></ul></div><div class="fc"><h5>Job Seekers</h5><ul><li><a onclick="sp('jobs')">Open Positions</a></li><li><a onclick="sp('apply')">Apply Now</a></li></ul></div><div class="fc"><h5>Employers</h5><ul><li><a onclick="sp('book')">Book a Meeting</a></li><li><a onclick="sp('calculator')">Cost Calculator</a></li></ul></div></div><div class="fbot"><span>© 2025 Evolution Staffing.</span></div></footer>
+</div>
+
+<!-- JOBS -->
+<div id="page-jobs" class="page">
+  <div style="background:var(--ow);border-bottom:1px solid var(--bd);padding:4rem 6%;"><div class="wrap"><span class="lbl">Open Positions</span><h1 class="dsp" style="margin-bottom:1rem;">Find Your Next<br>Opportunity.</h1><p class="sub">Roles across Georgia, Texas, and the Southeast. Full-time, temp, and contract available.</p></div></div>
+  <section><div class="wrap"><div class="fb" id="fb"><button class="fb2 act" onclick="fj('all',this)">All</button><button class="fb2" onclick="fj('healthcare',this)">Healthcare</button><button class="fb2" onclick="fj('construction',this)">Construction</button><button class="fb2" onclick="fj('logistics',this)">Logistics</button><button class="fb2" onclick="fj('admin',this)">Admin</button><button class="fb2" onclick="fj('industrial',this)">Industrial</button><button class="fb2" onclick="fj('utilities',this)">Utilities</button><button class="fb2" onclick="fj('sales',this)">Sales</button><button class="fb2" onclick="fj('it',this)">IT</button></div><div class="jg" id="jgrid"></div><div style="margin-top:3rem;padding:2.5rem;background:var(--ow);border:1px solid var(--bd);border-radius:14px;text-align:center;"><h3 style="font-family:'Instrument Serif',serif;font-size:1.5rem;margin-bottom:.5rem;">Don't See the Right Fit?</h3><p style="color:var(--mu);font-size:.9rem;margin-bottom:1.5rem;">Submit a general application and a recruiter will reach out when a matching role opens.</p><button class="btn bn" onclick="sp('apply')">Submit General Application</button></div></div></section>
+  <footer><div class="fg3"><div class="fb3"><span class="logo" style="color:#fff;cursor:default;">Evolution<span>.</span></span><p>National workforce solutions headquartered in Atlanta, Georgia.</p></div><div class="fc"><h5>Company</h5><ul><li><a onclick="sp('home')">Home</a></li><li><a onclick="sp('services')">Services</a></li></ul></div><div class="fc"><h5>Job Seekers</h5><ul><li><a onclick="sp('jobs')">Open Positions</a></li><li><a onclick="sp('apply')">Apply Now</a></li></ul></div><div class="fc"><h5>Employers</h5><ul><li><a onclick="sp('book')">Book a Meeting</a></li><li><a onclick="sp('calculator')">Cost Calculator</a></li></ul></div></div><div class="fbot"><span>© 2025 Evolution Staffing.</span></div></footer>
+</div>
+
+<!-- APPLY -->
+<div id="page-apply" class="page">
+  <div style="background:var(--ow);border-bottom:1px solid var(--bd);padding:4rem 6%;"><div class="wrap"><span class="lbl">Join Our Network</span><h1 class="dsp" style="margin-bottom:1rem;">Apply Today.</h1><p class="sub">Complete the form below and upload your resume. A recruiter will be in touch within one business day.</p></div></div>
+  <section><div class="wrap" style="max-width:720px;">
+    <div id="afw"><div class="fg2">
+      <div class="fi"><label>First Name *</label><input type="text" placeholder="John" id="aFN"></div>
+      <div class="fi"><label>Last Name *</label><input type="text" placeholder="Smith" id="aLN"></div>
+      <div class="fi"><label>Email Address *</label><input type="email" placeholder="john@email.com" id="aEM"></div>
+      <div class="fi"><label>Phone Number *</label><input type="tel" placeholder="(404) 555-0100" id="aPH"></div>
+      <div class="fi"><label>City</label><input type="text" placeholder="Atlanta" id="aCT"></div>
+      <div class="fi"><label>State</label><select id="aST"><option value="">Select...</option><option>Georgia</option><option>Texas</option><option>Florida</option><option>North Carolina</option><option>Tennessee</option><option>Alabama</option><option>South Carolina</option><option>Mississippi</option><option>Other</option></select></div>
+      <div class="fi ff"><label>Industry / Area of Interest *</label><select id="aIN"><option value="">Select...</option><option>Healthcare</option><option>Construction</option><option>Electrical & Utilities</option><option>Logistics & Shipping</option><option>Administrative</option><option>Sales & Marketing</option><option>Light Industrial</option><option>IT & Technology</option><option>Finance & Accounting</option><option>Maintenance & Facilities</option><option>Hospitality</option><option>Education Support</option><option>Other</option></select></div>
+      <div class="fi ff"><label>Position / Job Title Interested In</label><input type="text" placeholder="e.g. Registered Nurse, Forklift Operator, Admin Assistant" id="aJT"></div>
+      <div class="fi"><label>Employment Type</label><select id="aET"><option value="">Select...</option><option>Full-Time</option><option>Part-Time</option><option>Temporary</option><option>Contract</option><option>Open to Any</option></select></div>
+      <div class="fi"><label>Years of Experience</label><select id="aEX"><option value="">Select...</option><option>Less than 1 year</option><option>1–2 years</option><option>3–5 years</option><option>6–10 years</option><option>10+ years</option></select></div>
+      <div class="fi ff"><label>Certifications / Licenses</label><input type="text" placeholder="e.g. RN, CDL-A, OSHA 10, PMP" id="aCR"></div>
+      <div class="fi ff"><label>Brief Summary</label><textarea placeholder="Tell us about your background, skills, and what you're looking for..." id="aBIO"></textarea></div>
+      <div class="fi ff"><label>Resume / CV Upload</label><div class="uz" onclick="document.getElementById('rfile').click()" id="uzone"><input type="file" id="rfile" accept=".pdf,.doc,.docx" onchange="handleUpload(this)"><span class="ul2" id="ulbl">Click to upload your resume</span><span class="us">PDF, DOC, or DOCX — max 10MB</span></div></div>
+      <div class="fi ff"><label>How did you hear about us?</label><select id="aREF"><option value="">Select...</option><option>Google Search</option><option>Indeed / Job Board</option><option>Referred by a Friend</option><option>Social Media</option><option>LinkedIn</option><option>Other</option></select></div>
+      <div class="ff"><button class="fs" onclick="subApp()">Submit Application</button></div>
+    </div></div>
+    <div class="sb2" id="asucc"><h3>Application Received</h3><p>Thank you for applying with Evolution Staffing. A recruiter will be in touch within one business day.</p></div>
+  </div></section>
+  <footer><div class="fg3"><div class="fb3"><span class="logo" style="color:#fff;cursor:default;">Evolution<span>.</span></span><p>National workforce solutions headquartered in Atlanta, Georgia.</p></div><div class="fc"><h5>Company</h5><ul><li><a onclick="sp('home')">Home</a></li><li><a onclick="sp('services')">Services</a></li></ul></div><div class="fc"><h5>Job Seekers</h5><ul><li><a onclick="sp('jobs')">Open Positions</a></li><li><a onclick="sp('apply')">Apply Now</a></li></ul></div><div class="fc"><h5>Employers</h5><ul><li><a onclick="sp('book')">Book a Meeting</a></li></ul></div></div><div class="fbot"><span>© 2025 Evolution Staffing.</span></div></footer>
+</div>
+
+<!-- ABOUT -->
+<div id="page-about" class="page">
+  <div class="abh"><div class="abg"></div><div class="abo"></div><div class="abc"><span class="lbl" style="color:var(--tl);">Our Story</span><h1>Built on Results.<br>Driven by People.</h1><p>Evolution Staffing was founded on one conviction: the right match between employer and employee changes everything. We built our entire operation to make that happen — at speed, at scale, and with accountability.</p></div></div>
+  <section><div class="wrap"><div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;" class="rv"><div><span class="lbl">Who We Are</span><h2 class="sh">A Staffing Company<br>That Actually Gets It.</h2><p style="color:var(--mu);line-height:1.8;margin-bottom:1.25rem;font-size:.95rem;">Evolution Staffing is a national workforce solutions company headquartered in Atlanta, Georgia. We specialize in connecting businesses across every major industry with qualified, pre-screened talent — fast.</p><p style="color:var(--mu);line-height:1.8;margin-bottom:1.25rem;font-size:.95rem;">Every client gets a dedicated point of contact who knows your industry, your market, and your expectations. Every candidate gets real support — not an automated queue.</p><p style="color:var(--mu);line-height:1.8;font-size:.95rem;">Our coverage spans Georgia, Texas, and across the Southeast — with the infrastructure and talent pool to go wherever your workforce needs take you.</p></div><div><div class="apg"><img class="ap" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Modern office" loading="lazy"><img class="ap" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="Atlanta skyline" loading="lazy"></div></div></div></div></section>
+  <hr class="dv">
+  <section style="padding-top:0;"><div class="wrap"><div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;" class="rv"><div><img src="https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?w=900&q=80" alt="Atlanta skyline at dusk" style="width:100%;border-radius:14px;display:block;" loading="lazy"></div><div><div class="mb"><blockquote>The right job changes a person's life. The right hire changes a company's trajectory.</blockquote><div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;"><div><span style="font-family:'Instrument Serif',serif;font-size:2.5rem;color:var(--tl);display:block;line-height:1;">12+</span><span style="color:rgba(255,255,255,.5);font-size:.8rem;">Industries served</span></div><div><span style="font-family:'Instrument Serif',serif;font-size:2.5rem;color:var(--tl);display:block;line-height:1;">5+</span><span style="color:rgba(255,255,255,.5);font-size:.8rem;">States covered</span></div><div><span style="font-family:'Instrument Serif',serif;font-size:2.5rem;color:var(--tl);display:block;line-height:1;">48hr</span><span style="color:rgba(255,255,255,.5);font-size:.8rem;">Average fill time</span></div><div><span style="font-family:'Instrument Serif',serif;font-size:2.5rem;color:var(--tl);display:block;line-height:1;">30d</span><span style="color:rgba(255,255,255,.5);font-size:.8rem;">Replacement guarantee</span></div></div></div></div></div></div></section>
+  <hr class="dv">
+  <section><div class="wrap"><div class="rv" style="margin-bottom:2.5rem;"><span class="lbl">Our Values</span><h2 class="sh">What Drives Us</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;" class="rv"><div style="padding:2rem;border:1px solid var(--bd);border-radius:12px;"><div style="width:8px;height:8px;background:var(--tm);border-radius:50%;margin-bottom:1.25rem;"></div><h3 style="font-weight:700;font-size:1rem;margin-bottom:.5rem;">Integrity</h3><p style="color:var(--mu);font-size:.875rem;line-height:1.65;">Straight with clients and candidates. No overselling, no runaround — honest communication and follow-through every time.</p></div><div style="padding:2rem;border:1px solid var(--bd);border-radius:12px;"><div style="width:8px;height:8px;background:var(--tm);border-radius:50%;margin-bottom:1.25rem;"></div><h3 style="font-weight:700;font-size:1rem;margin-bottom:.5rem;">Speed</h3><p style="color:var(--mu);font-size:.875rem;line-height:1.65;">Workforce needs don't wait. We move fast without sacrificing quality — that's the standard we hold ourselves to.</p></div><div style="padding:2rem;border:1px solid var(--bd);border-radius:12px;"><div style="width:8px;height:8px;background:var(--tm);border-radius:50%;margin-bottom:1.25rem;"></div><h3 style="font-weight:700;font-size:1rem;margin-bottom:.5rem;">Precision</h3><p style="color:var(--mu);font-size:.875rem;line-height:1.65;">We match, not just fill. Every placement is made with care, ensuring the right fit for the employer and the worker.</p></div><div style="padding:2rem;border:1px solid var(--bd);border-radius:12px;"><div style="width:8px;height:8px;background:var(--tm);border-radius:50%;margin-bottom:1.25rem;"></div><h3 style="font-weight:700;font-size:1rem;margin-bottom:.5rem;">Accountability</h3><p style="color:var(--mu);font-size:.875rem;line-height:1.65;">Our 30-day replacement guarantee isn't a marketing line. If a placement doesn't work, we make it right at no charge.</p></div></div></div></section>
+  <div class="ctab"><div class="wrap rv"><h2>Work With Evolution</h2><p>Whether you're hiring or looking for work — we're your next step.</p><div class="ctabtns"><button class="btn bw" onclick="sp('book')">Book a Consultation</button><button class="btn bow" onclick="sp('apply')">Apply Now</button></div></div></div>
+  <footer><div class="fg3"><div class="fb3"><span class="logo" style="color:#fff;cursor:default;">Evolution<span>.</span></span><p>National workforce solutions headquartered in Atlanta, Georgia.</p></div><div class="fc"><h5>Company</h5><ul><li><a onclick="sp('home')">Home</a></li><li><a onclick="sp('services')">Services</a></li><li><a onclick="sp('about')">About Us</a></li></ul></div><div class="fc"><h5>Job Seekers</h5><ul><li><a onclick="sp('jobs')">Open Positions</a></li><li><a onclick="sp('apply')">Apply Now</a></li></ul></div><div class="fc"><h5>Employers</h5><ul><li><a onclick="sp('book')">Book a Meeting</a></li><li><a onclick="sp('calculator')">Cost Calculator</a></li></ul></div></div><div class="fbot"><span>© 2025 Evolution Staffing.</span></div></footer>
+</div>
+
+<!-- BOOK -->
+<div id="page-book" class="page">
+  <div style="background:var(--ow);border-bottom:1px solid var(--bd);padding:4rem 6%;"><div class="wrap"><span class="lbl">Schedule a Meeting</span><h1 class="dsp" style="margin-bottom:1rem;">Book a Consultation.</h1><p class="sub">Pick a time that works for you. A senior recruiter will call to understand your workforce needs and walk you through how we work.</p></div></div>
+  <section><div class="wrap"><div class="bkg">
+    <div class="bi"><h3>What to Expect</h3><p>A 30-minute discovery call with a dedicated Evolution recruiter. No pitch decks, no pressure — just a conversation about what you need and how we can deliver.</p>
+      <div class="bd2"><div class="bdi">30m</div><div><h4>30-Minute Discovery Call</h4><p>Focused entirely on your staffing needs, timeline, and priorities</p></div></div>
+      <div class="bd2"><div class="bdi">2hr</div><div><h4>Same-Day Confirmation</h4><p>We confirm your booking within 2 business hours</p></div></div>
+      <div class="bd2"><div class="bdi">$0</div><div><h4>No Obligation</h4><p>Learn how we work and get your rate before committing to anything</p></div></div>
+    </div>
+    <div id="bfw">
+      <div style="margin-bottom:1.75rem;">
+        <div class="cm"><span id="cml">May 2025</span><span><span class="cn" onclick="prevM()">&#8592;</span><span class="cn" onclick="nextM()">&#8594;</span></span></div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:.25rem;margin-bottom:.5rem;text-align:center;"><div style="font-size:.68rem;font-weight:700;color:var(--mu);padding:.4rem 0;">S</div><div style="font-size:.68rem;font-weight:700;color:var(--mu);padding:.4rem 0;">M</div><div style="font-size:.68rem;font-weight:700;color:var(--mu);padding:.4rem 0;">T</div><div style="font-size:.68rem;font-weight:700;color:var(--mu);padding:.4rem 0;">W</div><div style="font-size:.68rem;font-weight:700;color:var(--mu);padding:.4rem 0;">T</div><div style="font-size:.68rem;font-weight:700;color:var(--mu);padding:.4rem 0;">F</div><div style="font-size:.68rem;font-weight:700;color:var(--mu);padding:.4rem 0;">S</div></div>
+        <div class="dg" id="cg"></div>
+      </div>
+      <div style="margin-bottom:1.75rem;"><label style="font-size:.8rem;font-weight:600;color:var(--nv);display:block;margin-bottom:.75rem;letter-spacing:.02em;">Select a Time (EST)</label><div class="tg" id="tgrid"><button class="ts" onclick="selT(this)">9:00 AM</button><button class="ts" onclick="selT(this)">9:30 AM</button><button class="ts" onclick="selT(this)">10:00 AM</button><button class="ts" onclick="selT(this)">10:30 AM</button><button class="ts" onclick="selT(this)">11:00 AM</button><button class="ts" onclick="selT(this)">11:30 AM</button><button class="ts" onclick="selT(this)">1:00 PM</button><button class="ts" onclick="selT(this)">1:30 PM</button><button class="ts" onclick="selT(this)">2:00 PM</button><button class="ts" onclick="selT(this)">2:30 PM</button><button class="ts" onclick="selT(this)">3:00 PM</button><button class="ts" onclick="selT(this)">3:30 PM</button></div></div>
+      <div style="display:flex;flex-direction:column;gap:1.125rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.125rem;"><div class="fi"><label>First Name *</label><input type="text" placeholder="Jane" id="bFN"></div><div class="fi"><label>Last Name *</label><input type="text" placeholder="Doe" id="bLN"></div></div>
+        <div class="fi"><label>Company Name *</label><input type="text" placeholder="Acme Corp" id="bCO"></div>
+        <div class="fi"><label>Email *</label><input type="email" placeholder="jane@acmecorp.com" id="bEM"></div>
+        <div class="fi"><label>Phone</label><input type="tel" placeholder="(404) 555-0100" id="bPH"></div>
+        <div class="fi"><label>Industry hiring for?</label><select id="bIN"><option value="">Select...</option><option>Healthcare</option><option>Construction</option><option>Electrical & Utilities</option><option>Logistics</option><option>Administrative</option><option>Sales</option><option>Industrial</option><option>IT</option><option>Other</option></select></div>
+        <div class="fi"><label>How many positions to fill?</label><select id="bPO"><option value="">Select...</option><option>1–5</option><option>6–15</option><option>16–50</option><option>50+</option></select></div>
+        <button class="fs" onclick="subBook()">Confirm Booking</button>
+      </div>
+    </div>
+    <div class="sb2" id="bsucc" style="grid-column:2;"><h3>You're Booked</h3><p>A recruiter will confirm your appointment within 2 business hours. Check your email for a confirmation.</p></div>
+  </div></div></section>
+  <footer><div class="fg3"><div class="fb3"><span class="logo" style="color:#fff;cursor:default;">Evolution<span>.</span></span><p>National workforce solutions headquartered in Atlanta, Georgia.</p></div><div class="fc"><h5>Company</h5><ul><li><a onclick="sp('home')">Home</a></li><li><a onclick="sp('services')">Services</a></li></ul></div><div class="fc"><h5>Job Seekers</h5><ul><li><a onclick="sp('jobs')">Open Positions</a></li><li><a onclick="sp('apply')">Apply Now</a></li></ul></div><div class="fc"><h5>Employers</h5><ul><li><a onclick="sp('book')">Book a Meeting</a></li><li><a onclick="sp('calculator')">Cost Calculator</a></li></ul></div></div><div class="fbot"><span>© 2025 Evolution Staffing.</span></div></footer>
+</div>
+
+<!-- CALCULATOR -->
+<div id="page-calculator" class="page">
+  <div style="background:var(--ow);border-bottom:1px solid var(--bd);padding:4rem 6%;"><div class="wrap"><span class="lbl">Cost Comparison</span><h1 class="dsp" style="margin-bottom:1rem;">See What You're<br>Actually Paying.</h1><p class="sub">Compare what your current agency charges versus what Evolution would cost — and see your annual savings in real time.</p></div></div>
+  <section><div class="wrap" style="max-width:860px;"><div class="cw rv">
+    <div class="ch"><h3>Staffing Cost Calculator</h3><p>Enter your workforce details. Results update instantly as you type.</p></div>
+    <div class="cb">
+      <div class="cr"><div class="ciw"><label>Number of Placements Per Year</label><div class="cin"><span class="cp">#</span><input type="number" id="cP" value="10" min="1" oninput="calc()"></div></div><div class="ciw"><label>Average Annual Salary Per Role</label><div class="cin"><span class="cp">$</span><input type="number" id="cS" value="45000" min="1" oninput="calc()"></div></div></div>
+      <div class="cr"><div class="ciw"><label>Competitor's Fee Rate (%)</label><div class="cin"><span class="cp">%</span><input type="number" id="cCR" value="33" min="1" max="100" oninput="calc()"></div></div><div class="ciw"><label>Evolution's Rate (%)</label><div class="cin"><span class="cp">%</span><input type="number" id="cER" value="20" min="1" max="100" oninput="calc()"></div></div></div>
+      <div style="background:var(--ow);border-radius:10px;padding:1.5rem;margin-top:.5rem;border:1px solid var(--bd);"><p style="font-size:.8rem;color:var(--mu);line-height:1.65;">Evolution's rate is competitive and negotiable based on volume, industry, and contract terms. The figure above is illustrative — your dedicated recruiter will provide an exact quote after your consultation.</p></div>
+      <div class="cres">
+        <div class="rr"><span class="rl">Competitor cost per placement</span><span class="rv2" id="r1">—</span></div>
+        <div class="rr"><span class="rl">Evolution cost per placement</span><span class="rv2 ev" id="r2">—</span></div>
+        <div class="rr"><span class="rl">Total competitor annual cost</span><span class="rv2" id="r3">—</span></div>
+        <div class="rr"><span class="rl">Total Evolution annual cost</span><span class="rv2 ev" id="r4">—</span></div>
+        <div class="rr" style="border:none;"><span class="rl">Annual savings with Evolution</span><span class="rv2 sv" id="r5">—</span></div>
+      </div>
+      <div class="sbann"><div><div class="sbl">Your Estimated Annual Savings</div><div class="sba" id="sbig">$0</div></div><button class="sbc" onclick="sp('book')">Get Your Exact Rate — Book a Consultation</button></div>
+      <div style="margin-top:2rem;border:1px solid var(--bd);border-radius:10px;overflow:hidden;">
+        <div style="background:var(--nv);padding:1.25rem 1.75rem;"><span style="font-weight:600;color:#fff;font-size:.9rem;">What's Included With Evolution</span></div>
+        <div style="padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:.875rem;">
+          <div style="display:flex;gap:1rem;align-items:flex-start;font-size:.875rem;"><div style="width:6px;height:6px;background:var(--tm);border-radius:50%;margin-top:.45rem;flex-shrink:0;"></div><div><strong>Full background checks and verification</strong> — every candidate, every time, at no additional cost</div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;font-size:.875rem;"><div style="width:6px;height:6px;background:var(--tm);border-radius:50%;margin-top:.45rem;flex-shrink:0;"></div><div><strong>30-day replacement guarantee</strong> — if a placement doesn't work out, we replace them free of charge</div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;font-size:.875rem;"><div style="width:6px;height:6px;background:var(--tm);border-radius:50%;margin-top:.45rem;flex-shrink:0;"></div><div><strong>Dedicated recruiter on your account</strong> — one person, direct line, full accountability</div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;font-size:.875rem;"><div style="width:6px;height:6px;background:var(--tm);border-radius:50%;margin-top:.45rem;flex-shrink:0;"></div><div><strong>48-hour average fill time</strong> — active candidate bench, not a cold database searched on demand</div></div>
+          <div style="display:flex;gap:1rem;align-items:flex-start;font-size:.875rem;"><div style="width:6px;height:6px;background:var(--tm);border-radius:50%;margin-top:.45rem;flex-shrink:0;"></div><div><strong>Payroll, compliance, and HR handling</strong> — for temp and contract placements, included in the rate</div></div>
+        </div>
+      </div>
+    </div>
+  </div></div></section>
+  <div class="ctab"><div class="wrap rv"><h2>Ready to Switch?</h2><p>Book a 30-minute call and we'll walk you through your exact rate and what you'll save.</p><div class="ctabtns"><button class="btn bw" onclick="sp('book')">Book a Consultation</button><button class="btn bow" onclick="sp('contact')">Contact Our Team</button></div></div></div>
+  <footer><div class="fg3"><div class="fb3"><span class="logo" style="color:#fff;cursor:default;">Evolution<span>.</span></span><p>National workforce solutions headquartered in Atlanta, Georgia.</p></div><div class="fc"><h5>Company</h5><ul><li><a onclick="sp('home')">Home</a></li><li><a onclick="sp('services')">Services</a></li></ul></div><div class="fc"><h5>Job Seekers</h5><ul><li><a onclick="sp('jobs')">Open Positions</a></li><li><a onclick="sp('apply')">Apply Now</a></li></ul></div><div class="fc"><h5>Employers</h5><ul><li><a onclick="sp('book')">Book a Meeting</a></li><li><a onclick="sp('calculator')">Cost Calculator</a></li></ul></div></div><div class="fbot"><span>© 2025 Evolution Staffing.</span></div></footer>
+</div>
+
+<!-- CONTACT -->
+<div id="page-contact" class="page">
+  <div style="background:var(--ow);border-bottom:1px solid var(--bd);padding:4rem 6%;"><div class="wrap"><span class="lbl">Get in Touch</span><h1 class="dsp" style="margin-bottom:1rem;">Let's Talk<br>Workforce.</h1><p class="sub">For employers looking to staff — reach out below and we'll respond within one business hour during office hours.</p></div></div>
+  <section><div class="wrap"><div class="cog">
+    <div><span class="lbl">Contact Information</span><h2 class="sh" style="margin-bottom:2rem;">Reach Our Team</h2>
+      <div class="cb2"><div class="ci">HQ</div><div><h4>Headquarters</h4><p>Atlanta, Georgia<br>Serving the Southeast and national markets</p></div></div>
+      <div class="cb2"><div class="ci">TEL</div><div><h4>Phone</h4><a href="tel:+14045550000">(404) 555-0000</a></div></div>
+      <div class="cb2"><div class="ci" style="font-size:.6rem;">EMAIL</div><div><h4>Email</h4><a href="mailto:info@evolutionstaffing.com">info@evolutionstaffing.com</a></div></div>
+      <div class="cb2"><div class="ci">HRS</div><div><h4>Office Hours</h4><p>Monday – Friday: 8:00 AM – 6:00 PM EST<br>Saturday: 9:00 AM – 2:00 PM EST</p></div></div>
+      <div class="cb2" style="border:none;"><div class="ci" style="color:#dc2626;font-size:.6rem;border-color:#fecaca;background:#fef2f2;">24/7</div><div><h4>Emergency Staffing Line</h4><p style="margin-bottom:.5rem;">For urgent staffing needs that cannot wait.</p><a href="tel:+14045550911" style="font-weight:700;color:var(--nv);">(404) 555-0911</a></div></div>
+    </div>
+    <div><span class="lbl">Send a Message</span><h2 class="sh" style="margin-bottom:2rem;">For Employers</h2>
+      <div id="cfw" style="display:flex;flex-direction:column;gap:1.125rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.125rem;"><div class="fi"><label>Company Name *</label><input type="text" placeholder="Acme Corp" id="cfCO"></div><div class="fi"><label>Your Name *</label><input type="text" placeholder="Jane Doe" id="cfNM"></div></div>
+        <div class="fi"><label>Email *</label><input type="email" placeholder="jane@acmecorp.com" id="cfEM"></div>
+        <div class="fi"><label>Phone</label><input type="tel" placeholder="(404) 555-0100" id="cfPH"></div>
+        <div class="fi"><label>Industry</label><select id="cfIN"><option>Select...</option><option>Healthcare</option><option>Construction</option><option>Electrical & Utilities</option><option>Logistics</option><option>Administrative</option><option>Sales</option><option>Industrial</option><option>IT</option><option>Other</option></select></div>
+        <div class="fi"><label>Positions Needed</label><select id="cfPO"><option>Select range...</option><option>1–5</option><option>6–15</option><option>16–50</option><option>50+</option></select></div>
+        <div class="fi"><label>Message</label><textarea placeholder="Tell us about your staffing needs, timeline, and any specifics..." id="cfMS"></textarea></div>
+        <button class="fs" onclick="subCon()">Send Message</button>
+      </div>
+      <div class="sb2" id="csucc"><h3>Message Received</h3><p>A member of our team will be in touch within one business hour during office hours.</p></div>
+    </div>
+  </div></div></section>
+  <footer><div class="fg3"><div class="fb3"><span class="logo" style="color:#fff;cursor:default;">Evolution<span>.</span></span><p>National workforce solutions headquartered in Atlanta, Georgia.</p></div><div class="fc"><h5>Company</h5><ul><li><a onclick="sp('home')">Home</a></li><li><a onclick="sp('services')">Services</a></li><li><a onclick="sp('about')">About Us</a></li></ul></div><div class="fc"><h5>Job Seekers</h5><ul><li><a onclick="sp('jobs')">Open Positions</a></li><li><a onclick="sp('apply')">Apply Now</a></li></ul></div><div class="fc"><h5>Employers</h5><ul><li><a onclick="sp('book')">Book a Meeting</a></li><li><a onclick="sp('calculator')">Cost Calculator</a></li></ul></div></div><div class="fbot"><span>© 2025 Evolution Staffing. All rights reserved.</span><span>Atlanta, GA · Houston, TX</span></div></footer>
+</div>
+
+<script>
+const JOBS=[
+  {t:"Registered Nurse – ICU",l:"Atlanta, GA",ty:"Full-Time",p:"$38–$48/hr",c:"healthcare",h:true},
+  {t:"CNA / Certified Nursing Assistant",l:"Savannah, GA",ty:"Full-Time",p:"$18–$22/hr",c:"healthcare",h:false},
+  {t:"Medical Receptionist",l:"Augusta, GA",ty:"Full-Time",p:"$16–$20/hr",c:"healthcare",h:false},
+  {t:"Home Health Aide",l:"Macon, GA",ty:"Part-Time",p:"$15–$18/hr",c:"healthcare",h:false},
+  {t:"Phlebotomist",l:"Columbus, GA",ty:"Full-Time",p:"$17–$21/hr",c:"healthcare",h:false},
+  {t:"General Labor – Construction",l:"Atlanta, GA",ty:"Temp",p:"$18–$22/hr",c:"construction",h:true},
+  {t:"Concrete Finisher",l:"Houston, TX",ty:"Full-Time",p:"$22–$28/hr",c:"construction",h:false},
+  {t:"Construction Supervisor",l:"Dallas, TX",ty:"Full-Time",p:"$55K–$75K/yr",c:"construction",h:false},
+  {t:"Roofer / Roofing Technician",l:"Savannah, GA",ty:"Temp-to-Perm",p:"$20–$26/hr",c:"construction",h:false},
+  {t:"Project Manager – Construction",l:"Charlotte, NC",ty:"Full-Time",p:"$70K–$95K/yr",c:"construction",h:false},
+  {t:"Licensed Electrician (Journeyman)",l:"Atlanta, GA",ty:"Full-Time",p:"$28–$38/hr",c:"utilities",h:true},
+  {t:"HVAC Technician",l:"Houston, TX",ty:"Full-Time",p:"$25–$35/hr",c:"utilities",h:false},
+  {t:"Utility Line Worker",l:"Birmingham, AL",ty:"Full-Time",p:"$24–$32/hr",c:"utilities",h:false},
+  {t:"Maintenance Technician",l:"Nashville, TN",ty:"Full-Time",p:"$20–$26/hr",c:"utilities",h:false},
+  {t:"Forklift Operator",l:"Atlanta, GA",ty:"Full-Time",p:"$17–$22/hr",c:"logistics",h:true},
+  {t:"CDL-A Truck Driver",l:"Houston, TX",ty:"Full-Time",p:"$65K–$85K/yr",c:"logistics",h:true},
+  {t:"Warehouse Associate",l:"Savannah, GA",ty:"Temp",p:"$15–$18/hr",c:"logistics",h:false},
+  {t:"Shipping & Receiving Clerk",l:"Dallas, TX",ty:"Full-Time",p:"$16–$20/hr",c:"logistics",h:false},
+  {t:"Dispatcher",l:"Jacksonville, FL",ty:"Full-Time",p:"$18–$24/hr",c:"logistics",h:false},
+  {t:"Administrative Assistant",l:"Atlanta, GA",ty:"Full-Time",p:"$16–$22/hr",c:"admin",h:false},
+  {t:"Executive Assistant",l:"Dallas, TX",ty:"Full-Time",p:"$55K–$70K/yr",c:"admin",h:false},
+  {t:"Data Entry Specialist",l:"Remote / GA",ty:"Part-Time",p:"$14–$18/hr",c:"admin",h:false},
+  {t:"Customer Service Representative",l:"Atlanta, GA",ty:"Full-Time",p:"$15–$20/hr",c:"admin",h:false},
+  {t:"Office Manager",l:"Charlotte, NC",ty:"Full-Time",p:"$45K–$60K/yr",c:"admin",h:false},
+  {t:"Assembly Line Worker",l:"Macon, GA",ty:"Temp-to-Perm",p:"$15–$19/hr",c:"industrial",h:false},
+  {t:"Machine Operator",l:"Birmingham, AL",ty:"Full-Time",p:"$18–$24/hr",c:"industrial",h:false},
+  {t:"QA Inspector",l:"Savannah, GA",ty:"Full-Time",p:"$17–$22/hr",c:"industrial",h:false},
+  {t:"Packaging Associate",l:"Atlanta, GA",ty:"Temp",p:"$14–$17/hr",c:"industrial",h:false},
+  {t:"Inside Sales Representative",l:"Atlanta, GA",ty:"Full-Time",p:"$40K–$55K + comm",c:"sales",h:false},
+  {t:"Account Manager",l:"Houston, TX",ty:"Full-Time",p:"$50K–$70K/yr",c:"sales",h:false},
+  {t:"Marketing Coordinator",l:"Dallas, TX",ty:"Full-Time",p:"$42K–$55K/yr",c:"sales",h:false},
+  {t:"Help Desk Technician",l:"Atlanta, GA",ty:"Full-Time",p:"$20–$28/hr",c:"it",h:false},
+  {t:"Network Administrator",l:"Charlotte, NC",ty:"Full-Time",p:"$60K–$80K/yr",c:"it",h:false},
+  {t:"IT Support Specialist",l:"Houston, TX",ty:"Contract",p:"$25–$35/hr",c:"it",h:false},
+];
+function rj(cat){const g=document.getElementById('jgrid');const l=cat==='all'?JOBS:JOBS.filter(j=>j.c===cat);g.innerHTML=l.map(j=>`<div class="jc"><div class="jt"><div class="jb${j.h?' hot':''}">${j.h?'Urgent':j.ty}</div></div><div class="jtl">${j.t}</div><div class="jm"><span>${j.l}</span><span>${j.p}</span><span>${j.ty}</span></div><button class="ja" onclick="sp('apply')">Apply Now</button></div>`).join('');}
+function fj(c,b){document.querySelectorAll('.fb2').forEach(x=>x.classList.remove('act'));b.classList.add('act');rj(c);}
+function fmt(n){return'$'+Math.round(n).toLocaleString();}
+function calc(){const p=+document.getElementById('cP').value||0;const s=+document.getElementById('cS').value||0;const cr=+document.getElementById('cCR').value||0;const er=+document.getElementById('cER').value||0;const cp=s*(cr/100);const ep=s*(er/100);const ct=cp*p;const et=ep*p;const sv=ct-et;document.getElementById('r1').textContent=fmt(cp);document.getElementById('r2').textContent=fmt(ep);document.getElementById('r3').textContent=fmt(ct);document.getElementById('r4').textContent=fmt(et);document.getElementById('r5').textContent=fmt(sv)+'/yr';document.getElementById('sbig').textContent=fmt(sv);}
+// CALENDAR
+let cy=2025,cm=4,sd=null;
+const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function rc(){document.getElementById('cml').textContent=MN[cm]+' '+cy;const g=document.getElementById('cg');const f=new Date(cy,cm,1).getDay();const d=new Date(cy,cm+1,0).getDate();const t=new Date();let h='';for(let i=0;i<f;i++)h+=`<button class="db dis"></button>`;for(let i=1;i<=d;i++){const past=new Date(cy,cm,i)<new Date(t.getFullYear(),t.getMonth(),t.getDate());const dow=new Date(cy,cm,i).getDay();const dis=past||dow===0||dow===6;h+=`<button class="db${dis?' dis':''}${sd===i?' sel':''}" onclick="seld(${i})">${i}</button>`;}g.innerHTML=h;}
+function seld(d){sd=d;rc();}
+function prevM(){if(cm===0){cm=11;cy--;}else cm--;sd=null;rc();}
+function nextM(){if(cm===11){cm=0;cy++;}else cm++;sd=null;rc();}
+function selT(b){document.querySelectorAll('.ts').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');}
+// PAGE
+function sp(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});setTimeout(cr2,120);}
+function nv(n){sp(n);document.getElementById('mmenu').classList.remove('open');}
+function toggleMM(){document.getElementById('mmenu').classList.toggle('open');}
+// SCROLL
+window.addEventListener('scroll',()=>{const s=window.scrollY,tot=document.body.scrollHeight-window.innerHeight;document.getElementById('prog').style.width=(s/tot*100)+'%';document.getElementById('mn').classList.toggle('sc',s>10);cr2();});
+function cr2(){document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('vis');});}
+// FORMS
+function handleUpload(i){if(i.files[0]){document.getElementById('ulbl').textContent=i.files[0].name+' — uploaded';document.getElementById('uzone').style.borderColor='var(--tm)';document.getElementById('uzone').style.background='rgba(33,158,188,.05)';}}
+function subApp(){document.getElementById('afw').style.display='none';document.getElementById('asucc').style.display='block';window.scrollTo({top:0,behavior:'smooth'});}
+function subBook(){document.getElementById('bfw').style.display='none';document.getElementById('bsucc').style.display='block';window.scrollTo({top:0,behavior:'smooth'});}
+function subCon(){document.getElementById('cfw').style.display='none';document.getElementById('csucc').style.display='block';window.scrollTo({top:0,behavior:'smooth'});}
+// INIT
+rj('all');rc();calc();setTimeout(cr2,200);
+</script>
+</body>
+</html>
